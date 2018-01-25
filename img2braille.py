@@ -5,11 +5,11 @@ white_threshold = 128
 def dither(pixels, dims):
     (width, height) = dims
     for i in range(height-1):
-        for j in range(1,width-1):
+        for j in range(1, width-1):
             old = pixels[i][j] 
             new = 255 if old > white_threshold else 0
             err = old - new 
-            pixels[i][j] = new
+            pixels[ i ][ j ]  = new
             pixels[i+1][ j ] += err * 7/16
             pixels[i-1][j+1] += err * 3/16 
             pixels[ i ][j+1] += err * 5/16 
