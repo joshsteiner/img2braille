@@ -27,7 +27,7 @@ def toBraille(pixels, dims):
     (width, height) = dims
     for i in range(0, height, 4):
         braille.append([])
-        for j in range(0, width, 2):
+        for j in range(0, width-1, 2):
             offset = 0
             for k in range(min(4, height - i)):
                 offset += is_black(pixels[i+k][j]) * 2 ** k
