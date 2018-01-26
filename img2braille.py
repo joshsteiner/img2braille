@@ -1,3 +1,21 @@
+#!/usr/bin/env python3
+
+"""
+Usage:
+  img2braille.py [--dims=DIMS] [--contrast=CONTRAST] [--brightness=BRIGHTNESS] FILE
+  img2braille.py --help
+
+Arguments:
+  FILE                                     image to convert
+
+Options:
+  -h --help                                show help
+  -d DIMS --dims=DIMS                      image dimensions - 'width,height'
+  -c CONTRAST --contrast=CONTRAST          image contrast     [default: 1]
+  -b BRIGHTNESS --brightness=BRIGHTNESS    image brightness   [default: 1]
+"""
+
+from docopt import docopt
 from PIL import Image, ImageOps, ImageEnhance
 
 WHITE_THRESHOLD = 128
@@ -62,3 +80,17 @@ def img2braille(filename, dims=None, brightness=1, contrast=1):
             print('')
 
 
+if __name__ == '__main__':
+    args = docopt(__doc__)
+
+    if args['--dims']:
+        dims = [int(x) for x in args['--dims'].split(',')]
+    else:
+        dims = None
+
+    img2braille(
+        args['FILE'],
+        dims,
+        brightness=float(args['--brightness']),
+        contrast=float(args['--contrast'])
+    )
