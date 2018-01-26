@@ -40,15 +40,15 @@ def toBraille(pixels, dims):
     return braille
 
 
-def img2braille(filename, dims=None):
+def img2braille(filename, dims=None, brightness=1, contrast=1):
     with Image.open(filename) as img:
         if dims:
             img.thumbnail(dims)
         pixels = []
         (width, height) = img.size
         try:
-            img = ImageEnhance.Contrast(img).enhance(1)
-            img = ImageEnhance.Brightness(img).enhance(1)
+            img = ImageEnhance.Brightness(img).enhance(brightness)
+            img = ImageEnhance.Contrast(img).enhance(contrast)
         except ValueError:
             pass
         for i, px in enumerate(ImageOps.grayscale(img).getdata()):
