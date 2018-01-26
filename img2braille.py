@@ -1,9 +1,9 @@
 from PIL import Image, ImageOps, ImageEnhance
 
-white_threshold = 128
+WHITE_THRESHOLD = 128
 
 def is_black(pixel):
-    return pixel < white_threshold
+    return pixel < WHITE_THRESHOLD
 
 
 def dither(pixels, dims):
