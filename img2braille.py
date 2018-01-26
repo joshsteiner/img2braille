@@ -30,7 +30,7 @@ def toBraille(pixels, dims):
         for j in range(0, width, 2):
             offset = 0
             for k in range(min(4, height - i)):
-                offset += is_black(pixels[i+k][j]) * 2 ** k 
+                offset += is_black(pixels[i+k][j]) * 2 ** k
                 offset += is_black(pixels[i+k][j+1]) * 2 ** (k+3)
                 if k == 4:
                     offset += is_black(pixels[i+k][j]) * 2 ** 6
@@ -40,9 +40,10 @@ def toBraille(pixels, dims):
     return braille
 
 
-def img2braille(filename):
+def img2braille(filename, dims=None):
     with Image.open(filename) as img:
-        #img.thumbnail((400, 400))
+        if dims:
+            img.thumbnail(dims)
         pixels = []
         (width, height) = img.size
         try:
